@@ -20,11 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Ensure navigation links are visible
-    document.querySelectorAll('.nav-links').forEach(nav => {
-        nav.style.display = 'flex';
-        nav.style.opacity = '1';
-    });
+    // Initialize navigation links for desktop only
+    if (window.innerWidth > 768) {
+        document.querySelectorAll('.nav-links').forEach(nav => {
+            nav.style.display = 'flex';
+            nav.style.opacity = '1';
+        });
+    }
 
     // Animate navigation links with fade-in and scale effect (exclude HOME)
     gsap.from('.nav-link:not(.nav-link-home)', {
@@ -34,10 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.1,
         ease: 'power3.out',
         onComplete: () => {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.style.opacity = '1';
-                link.style.transform = 'scale(1)';
-            });
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.style.opacity = '1';
+                    link.style.transform = 'scale(1)';
+                });
+            }
         }
     });
 
@@ -48,10 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 0.8,
         ease: 'power3.out',
         onComplete: () => {
-            document.querySelectorAll('.nav-link-home').forEach(link => {
-                link.style.opacity = '1';
-                link.style.transform = 'scale(1)';
-            });
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.nav-link-home').forEach(link => {
+                    link.style.opacity = '1';
+                    link.style.transform = 'scale(1)';
+                });
+            }
         }
     });
 
