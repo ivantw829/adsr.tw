@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventsList.appendChild(eventCard);
             });
 
+            // Detect if the device is touch-enabled
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
             // Animate event cards on scroll
             gsap.utils.toArray('.event-card').forEach(card => {
                 gsap.to(card, {
@@ -37,34 +40,55 @@ document.addEventListener('DOMContentLoaded', () => {
                         trigger: card,
                         start: 'top 80%',
                         onEnter: () => card.classList.add('visible')
-                    }
+                    },
+                    duration: isTouchDevice ? 0.3 : 0.5,
+                    ease: 'power2.out'
                 });
 
-                // 3D hover effect
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = (y - centerY) / 20;
-                    const rotateY = (centerX - x) / 20;
-                    gsap.to(card, {
-                        rotationX: rotateX,
-                        rotationY: rotateY,
-                        duration: 0.3,
-                        ease: 'power2.out'
+                if (!isTouchDevice) {
+                    // 3D hover effect for non-touch devices
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = (y - centerY) / 20;
+                        const rotateY = (centerX - x) / 20;
+                        gsap.to(card, {
+                            rotationX: rotateX,
+                            rotationY: rotateY,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
                     });
-                });
 
-                card.addEventListener('mouseleave', () => {
-                    gsap.to(card, {
-                        rotationX: 0,
-                        rotationY: 0,
-                        duration: 0.3,
-                        ease: 'power2.out'
+                    // Reset 3D effect on mouse leave
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, {
+                            rotationX: 0,
+                            rotationY: 0,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
                     });
-                });
+                } else {
+                    // Touch interaction for mobile devices
+                    card.addEventListener('touchstart', () => {
+                        gsap.to(card, {
+                            scale: 1.05,
+                            duration: 0.2,
+                            ease: 'power2.out'
+                        });
+                    });
+                    card.addEventListener('touchend', () => {
+                        gsap.to(card, {
+                            scale: 1,
+                            duration: 0.2,
+                            ease: 'power2.out'
+                        });
+                    });
+                }
             });
         });
 });

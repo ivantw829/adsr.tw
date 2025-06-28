@@ -26,17 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
         nav.style.opacity = '1';
     });
 
-    // Animate navigation links with slide-in effect
-    gsap.from('.nav-link', {
-        x: -20,
+    // Animate navigation links with fade-in effect (exclude HOME)
+    gsap.from('.nav-link:not(.nav-link-home)', {
         opacity: 0,
         duration: 0.8,
-        stagger: 0.15,
+        stagger: 0.1,
         ease: 'power3.out',
         onComplete: () => {
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.style.opacity = '1';
                 link.style.transform = 'translateX(0)';
+            });
+        }
+    });
+
+    // Animate HOME link with subtle scale effect
+    gsap.from('.nav-link-home', {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        onComplete: () => {
+            document.querySelectorAll('.nav-link-home').forEach(link => {
+                link.style.opacity = '1';
+                link.style.transform = 'scale(1)';
             });
         }
     });
@@ -97,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile menu toggle with slide-in animation
+    // Mobile menu toggle with fade-in animation
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     menuToggle.addEventListener('click', (e) => {
@@ -111,8 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (mobileMenu.classList.contains('active')) {
                     mobileMenu.style.display = 'flex';
                     mobileMenu.style.opacity = '1';
-                    gsap.from(mobileMenu.querySelectorAll('.nav-link'), {
-                        x: -20,
+                    gsap.from(mobileMenu.querySelectorAll('.nav-link:not(.nav-link-home)'), {
                         opacity: 0,
                         duration: 0.5,
                         stagger: 0.1,
@@ -121,6 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             mobileMenu.querySelectorAll('.nav-link').forEach(link => {
                                 link.style.opacity = '1';
                                 link.style.transform = 'translateX(0)';
+                            });
+                        }
+                    });
+                    gsap.from(mobileMenu.querySelectorAll('.nav-link-home'), {
+                        scale: 0.9,
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: 'power3.out',
+                        onComplete: () => {
+                            mobileMenu.querySelectorAll('.nav-link-home').forEach(link => {
+                                link.style.opacity = '1';
+                                link.style.transform = 'scale(1)';
                             });
                         }
                     });
