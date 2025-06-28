@@ -15,15 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('../data/events.json')
         .then(response => response.json())
         .then(events => {
-            // Sort events by date (index 2) in descending order with error handling
-            events.sort((a, b) => {
-                const dateA = new Date(a[2]);
-                const dateB = new Date(b[2]);
-                // Handle invalid dates by placing them at the end
-                if (isNaN(dateA)) return 1;
-                if (isNaN(dateB)) return -1;
-                return dateB - dateA;
-            });
+            // Reverse the array to display oldest events first
+            events.reverse();
 
             const eventsList = document.getElementById('events-list');
             events.forEach(([title, content, date, category, link], index) => {
@@ -39,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 eventsList.appendChild(eventCard);
 
-                // Set initial opacity to ensure visibility
-                gsap.set(eventCard, { opacity: 1 });
+                // Set initial state to ensure visibility and alignment
+                gsap.set(eventCard, { opacity: 1, x: 0 });
 
                 // Animate event cards with slide-in only
                 gsap.from(eventCard, {
