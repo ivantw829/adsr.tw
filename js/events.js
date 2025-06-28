@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(events => {
             // Reverse the array to display oldest events first
-            events.reverse();
+            // events.reverse();
 
             const eventsList = document.getElementById('events-list');
             events.forEach(([title, content, date, category, link], index) => {
