@@ -20,13 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize navigation links for desktop only
-    if (window.innerWidth > 768) {
-        document.querySelectorAll('.nav-links').forEach(nav => {
-            nav.style.display = 'flex';
-            nav.style.opacity = '1';
-        });
-    }
+    // Initialize navigation links for desktop and mobile
+    document.querySelectorAll('.nav-links').forEach(nav => {
+        nav.style.display = 'flex';
+        nav.style.opacity = '1';
+    });
 
     // Animate navigation links with fade-in and scale effect (exclude HOME)
     gsap.from('.nav-link:not(.nav-link-home)', {
@@ -36,12 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         stagger: 0.1,
         ease: 'power3.out',
         onComplete: () => {
-            if (window.innerWidth > 768) {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.style.opacity = '1';
-                    link.style.transform = 'scale(1)';
-                });
-            }
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.style.opacity = '1';
+                link.style.transform = 'scale(1)';
+            });
         }
     });
 
@@ -52,12 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 0.8,
         ease: 'power3.out',
         onComplete: () => {
-            if (window.innerWidth > 768) {
-                document.querySelectorAll('.nav-link-home').forEach(link => {
-                    link.style.opacity = '1';
-                    link.style.transform = 'scale(1)';
-                });
-            }
+            document.querySelectorAll('.nav-link-home').forEach(link => {
+                link.style.opacity = '1';
+                link.style.transform = 'scale(1)';
+            });
         }
     });
 
@@ -116,62 +110,5 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             window.location.href = link.getAttribute('href');
         });
-    });
-
-    // Mobile menu toggle with sidebar slide-in animation
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = menuToggle.querySelector('i');
-    menuToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        mobileMenu.classList.toggle('active');
-        if (mobileMenu.classList.contains('active')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-            mobileMenu.style.display = 'flex';
-            gsap.to(mobileMenu, {
-                x: 0,
-                duration: 0.3,
-                ease: 'power3.out',
-                onStart: () => {
-                    gsap.from(mobileMenu.querySelectorAll('.nav-link:not(.nav-link-home)'), {
-                        opacity: 0,
-                        x: -20,
-                        duration: 0.5,
-                        stagger: 0.1,
-                        ease: 'power3.out',
-                        onComplete: () => {
-                            mobileMenu.querySelectorAll('.nav-link').forEach(link => {
-                                link.style.opacity = '1';
-                                link.style.transform = 'translateX(0)';
-                            });
-                        }
-                    });
-                    gsap.from(mobileMenu.querySelectorAll('.nav-link-home'), {
-                        scale: 0.9,
-                        opacity: 0,
-                        duration: 0.5,
-                        ease: 'power3.out',
-                        onComplete: () => {
-                            mobileMenu.querySelectorAll('.nav-link-home').forEach(link => {
-                                link.style.opacity = '1';
-                                link.style.transform = 'scale(1)';
-                            });
-                        }
-                    });
-                }
-            });
-        } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-            gsap.to(mobileMenu, {
-                x: '-100%',
-                duration: 0.3,
-                ease: 'power3.out',
-                onComplete: () => {
-                    mobileMenu.style.display = 'none';
-                }
-            });
-        }
     });
 });
