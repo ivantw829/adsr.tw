@@ -32,20 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 eventsList.appendChild(eventCard);
 
-                // Detect if the device is touch-enabled
-                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                // Set initial opacity to ensure visibility
+                gsap.set(eventCard, { opacity: 1 });
 
                 // Animate event cards with fade-in and slide-in
-                gsap.from(eventCard, {
-                    opacity: 0,
-                    x: index % 2 === 0 ? 20 : -20, // Alternate slide direction
-                    duration: isTouchDevice ? 0.3 : 0.5,
-                    delay: index * 0.2,
-                    ease: 'power2.out',
-                    onComplete: () => {
-                        eventCard.classList.add('visible');
+                gsap.fromTo(
+                    eventCard,
+                    { opacity: 0.5, x: index % 2 === 0 ? 20 : -20 },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        duration: 'ontouchstart' in window || navigator.maxTouchPoints > 0 ? 0.3 : 0.4,
+                        delay: index * 0.1,
+                        ease: 'power2.out'
                     }
-                });
+                );
+
+                // Detect if the device is touch-enabled
+                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
                 if (!isTouchDevice) {
                     // Simplified hover effect for desktop
