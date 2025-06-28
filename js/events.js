@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="text-gray-300 mt-2 font-source-han">${content}</p>
                     <p class="text-gray-400 mt-2 font-roboto">${date}</p>
                     <p class="text-sm text-gray-400 font-roboto">${category}</p>
-                    <a href="${link}" class="text-red-700 hover:underline mt-4 inline-block font-source-han">查看更多</a>
+                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="text-red-700 hover:underline mt-4 inline-block font-source-han">查看更多</a>
                 `;
                 eventsList.appendChild(eventCard);
             });
