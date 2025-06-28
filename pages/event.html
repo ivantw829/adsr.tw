@@ -17,26 +17,26 @@
 </head>
 <body class="bg-gray-900 text-white font-sans">
     <!-- Navigation -->
-    <nav class="bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 fixed w-full top-0 z-10">
+    <nav class="bg-gray-800 bg-opacity-80 backdrop-blur-md p-4 fixed w-full top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="../index.html" class="flex items-center text-2xl font-bold text-red-700">
+            <a href="../index.html" class="flex items-center text-2xl font-bold text-red-700 nav-logo">
                 <img src="../assets/logo.ico" alt="ADSR Icon" class="logo-icon w-8 h-8 mr-2">
                 ADSR
             </a>
             <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
-            <ul class="hidden md:flex space-x-6">
-                <li><a href="../index.html" class="hover:text-red-700 transition"><i class="fas fa-home mr-2"></i>HOME</a></li>
-                <li><a href="event.html" class="hover:text-red-700 transition"><i class="fas fa-calendar-alt mr-2"></i>EVENT</a></li>
-                <li><a href="join.html" class="hover:text-red-700 transition"><i class="fas fa-user-plus mr-2"></i>JOIN</a></li>
-                <li><a href="link.html" class="hover:text-red-700 transition"><i class="fas fa-link mr-2"></i>LINK</a></li>
+            <ul class="nav-links flex gap-6 md:flex">
+                <li><a href="../index.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-home mr-2"></i>HOME</a></li>
+                <li><a href="event.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-calendar-alt mr-2"></i>EVENT</a></li>
+                <li><a href="join.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-user-plus mr-2"></i>JOIN</a></li>
+                <li><a href="link.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-link mr-2"></i>LINK</a></li>
             </ul>
-            <ul class="hidden flex-col space-y-4 mt-4 md:hidden" id="mobile-menu">
-                <li><a href="../index.html" class="hover:text-red-700 transition"><i class="fas fa-home mr-2"></i>HOME</a></li>
-                <li><a href="event.html" class="hover:text-red-700 transition"><i class="fas fa-calendar-alt mr-2"></i>EVENT</a></li>
-                <li><a href="join.html" class="hover:text-red-700 transition"><i class="fas player-plus mr-2"></i>JOIN</a></li>
-                <li><a href="link.html" class="hover:text-red-700 transition"><i class="fas fa-link mr-2"></i>LINK</a></li>
+            <ul class="nav-links-mobile hidden flex-col gap-3 mt-4 md:hidden" id="mobile-menu">
+                <li><a href="../index.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-home mr-2"></i>HOME</a></li>
+                <li><a href="event.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-calendar-alt mr-2"></i>EVENT</a></li>
+                <li><a href="join.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-user-plus mr-2"></i>JOIN</a></li>
+                <li><a href="link.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-link mr-2"></i>LINK</a></li>
             </ul>
         </div>
     </nav>

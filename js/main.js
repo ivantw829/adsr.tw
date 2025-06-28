@@ -20,17 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Ensure navigation links are visible
+    document.querySelectorAll('.nav-links').forEach(nav => {
+        nav.style.display = 'flex';
+        nav.style.opacity = '1';
+    });
+
     // Animate navigation links with slide-in effect
-    gsap.from('nav ul li', {
-        x: -50,
+    gsap.from('.nav-link', {
+        x: -20,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out'
+        stagger: 0.15,
+        ease: 'power3.out',
+        onComplete: () => {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.style.opacity = '1';
+                link.style.transform = 'translateX(0)';
+            });
+        }
     });
 
     // Animate navigation logo and text
-    gsap.from('nav a.text-2xl', {
+    gsap.from('.nav-logo', {
         y: -20,
         opacity: 0,
         duration: 1,
@@ -51,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Animate navigation icons and logo on hover
-    gsap.utils.toArray('nav ul li a, nav a.text-2xl').forEach(link => {
+    gsap.utils.toArray('.nav-link, .nav-logo').forEach(link => {
         link.addEventListener('mouseenter', () => {
             gsap.to(link.querySelector('i') || link.querySelector('.logo-icon'), {
                 scale: 1.2,
@@ -78,12 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power2.out'
             });
         });
+        // Ensure click events are not blocked
+        link.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.location.href = link.getAttribute('href');
+        });
     });
 
     // Mobile menu toggle with slide-in animation
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
         mobileMenu.classList.toggle('active');
         gsap.to(mobileMenu, {
             height: mobileMenu.classList.contains('active') ? 'auto' : 0,
@@ -92,12 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
             onStart: () => {
                 if (mobileMenu.classList.contains('active')) {
                     mobileMenu.style.display = 'flex';
-                    gsap.from(mobileMenu.querySelectorAll('li'), {
-                        x: -50,
+                    mobileMenu.style.opacity = '1';
+                    gsap.from(mobileMenu.querySelectorAll('.nav-link'), {
+                        x: -20,
                         opacity: 0,
                         duration: 0.5,
                         stagger: 0.1,
-                        ease: 'power3.out'
+                        ease: 'power3.out',
+                        onComplete: () => {
+                            mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+                                link.style.opacity = '1';
+                                link.style.transform = 'translateX(0)';
+                            });
+                        }
                     });
                 }
             },

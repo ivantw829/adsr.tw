@@ -82,9 +82,23 @@ h1, h2, h3 {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-nav a:hover .logo-icon {
+.nav-logo:hover .logo-icon {
     transform: scale(1.2);
     filter: brightness(1.2);
+}
+
+/* Navigation Links */
+.nav-links, .nav-links-mobile {
+    pointer-events: auto;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    opacity: 1 !important;
 }
 
 /* Logo Animation */
@@ -138,7 +152,7 @@ nav a:hover .logo-icon {
 }
 
 /* Mobile Navigation */
-#mobile-menu.active {
+.nav-links-mobile.active {
     display: flex;
 }
 
@@ -152,9 +166,19 @@ nav a:hover .logo-icon {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .nav-links-mobile {
+        display: none;
+    }
+    .nav-links-mobile.active {
+        display: flex;
+        opacity: 1;
+    }
     nav ul {
         font-size: 1.1rem;
-        padding: 1rem;
+        padding: 0.5rem 1rem;
     }
     section h1 {
         font-size: 2.5rem;
@@ -177,5 +201,8 @@ nav a:hover .logo-icon {
     }
     .shine-effect {
         padding: 0.75rem 1.5rem;
+    }
+    .nav-link {
+        padding: 0.75rem 1rem;
     }
 }
