@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventCard.classList.add('event-card', 'bg-gray-800', 'p-6', 'rounded-lg', 'shadow-lg');
                 eventCard.style.borderLeft = `4px solid ${categoryColors[category.replace('#', '')]}`;
                 eventCard.innerHTML = `
-                    <h3 class="text-xl font-bold text-red-700 font-montserrat">${title}</h3>
+                    <h3 class="text-xl font-bold text-red-700 font-montserrat animate-text">${title}</h3>
                     <p class="text-gray-300 mt-2 font-source-han">${content}</p>
                     <p class="text-gray-400 mt-2 font-roboto">${date}</p>
                     <p class="text-sm text-gray-400 font-roboto">${category}</p>
-                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="text-red-700 hover:underline mt-4 inline-block font-source-han">查看更多</a>
+                    <a href="${link}" class="text-red-700 hover:underline mt-4 inline-block font-source-han shine-effect">查看更多</a>
                 `;
                 eventsList.appendChild(eventCard);
             });
@@ -33,41 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
             // Detect if the device is touch-enabled
             const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-            // Animate event cards on scroll
-            gsap.utils.toArray('.event-card').forEach(card => {
+            // Animate event cards with parallax effect
+            gsap.utils.toArray('.event-card').forEach((card, index) => {
                 gsap.to(card, {
                     scrollTrigger: {
                         trigger: card,
                         start: 'top 80%',
                         onEnter: () => card.classList.add('visible')
                     },
+                    y: -10 * index,
+                    opacity: 1,
                     duration: isTouchDevice ? 0.3 : 0.5,
                     ease: 'power2.out'
                 });
 
                 if (!isTouchDevice) {
-                    // 3D hover effect for non-touch devices
-                    card.addEventListener('mousemove', (e) => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        const rotateX = (y - centerY) / 20;
-                        const rotateY = (centerX - x) / 20;
+                    // Simplified hover effect for desktop
+                    card.addEventListener('mouseenter', () => {
                         gsap.to(card, {
-                            rotationX: rotateX,
-                            rotationY: rotateY,
+                            scale: 1.05,
+                            backgroundColor: 'rgba(55, 65, 81, 0.7)',
+                            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)',
                             duration: 0.3,
                             ease: 'power2.out'
                         });
                     });
-
-                    // Reset 3D effect on mouse leave
                     card.addEventListener('mouseleave', () => {
                         gsap.to(card, {
-                            rotationX: 0,
-                            rotationY: 0,
+                            scale: 1,
+                            backgroundColor: 'rgba(31, 41, 55, 0.2)',
+                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
                             duration: 0.3,
                             ease: 'power2.out'
                         });

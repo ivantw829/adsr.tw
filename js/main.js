@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
                 color: { value: '#a32622' },
                 shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
-                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                opacity: { value: 0.9, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2, sync: false } },
                 size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1, sync: false } },
-                line_linked: { enable: true, distance: 150, color: '#a32622', opacity: 0.4, width: 1 },
+                line_linked: { enable: true, distance: 150, color: '#a32622', opacity: 0.8, width: 1 },
                 move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
             },
             interactivity: {
@@ -26,16 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
         nav.style.opacity = '1';
     });
 
-    // Animate navigation links with fade-in effect (exclude HOME)
+    // Animate navigation links with fade-in and scale effect (exclude HOME)
     gsap.from('.nav-link:not(.nav-link-home)', {
         opacity: 0,
+        scale: 0.9,
         duration: 0.8,
         stagger: 0.1,
         ease: 'power3.out',
         onComplete: () => {
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.style.opacity = '1';
-                link.style.transform = 'translateX(0)';
+                link.style.transform = 'scale(1)';
             });
         }
     });
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Animate navigation logo and text
+    // Animate navigation logo with fade-in effect
     gsap.from('.nav-logo', {
         y: -20,
         opacity: 0,
@@ -62,16 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out'
     });
 
-    // Animate hero section content
+    // Animate hero section content with simple fade-in
     gsap.from('section h1, section h2, section p, section img', {
-        y: 50,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.3,
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.5,
+        stagger: 0.2,
         ease: 'power3.out',
-        scrollTrigger: {
-            trigger: 'section',
-            start: 'top 80%'
+        onComplete: () => {
+            document.querySelectorAll('section h1, section h2, section p, section img').forEach(el => {
+                gsap.set(el, { autoAlpha: 1, opacity: 1 });
+            });
         }
     });
 
@@ -110,22 +112,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile menu toggle with fade-in animation
+    // Mobile menu toggle with sidebar slide-in animation
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = menuToggle.querySelector('i');
     menuToggle.addEventListener('click', (e) => {
         e.preventDefault();
         mobileMenu.classList.toggle('active');
-        gsap.to(mobileMenu, {
-            height: mobileMenu.classList.contains('active') ? 'auto' : 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            onStart: () => {
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenu.style.display = 'flex';
-                    mobileMenu.style.opacity = '1';
+        if (mobileMenu.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+            mobileMenu.style.display = 'flex';
+            gsap.to(mobileMenu, {
+                x: 0,
+                duration: 0.3,
+                ease: 'power3.out',
+                onStart: () => {
                     gsap.from(mobileMenu.querySelectorAll('.nav-link:not(.nav-link-home)'), {
                         opacity: 0,
+                        x: -20,
                         duration: 0.5,
                         stagger: 0.1,
                         ease: 'power3.out',
@@ -149,12 +154,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
-            },
-            onComplete: () => {
-                if (!mobileMenu.classList.contains('active')) {
+            });
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            gsap.to(mobileMenu, {
+                x: '-100%',
+                duration: 0.3,
+                ease: 'power3.out',
+                onComplete: () => {
                     mobileMenu.style.display = 'none';
                 }
-            }
-        });
+            });
+        }
     });
 });
