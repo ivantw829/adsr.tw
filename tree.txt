@@ -1,0 +1,26 @@
+adsr-website/
+├── index.html
+├── pages/
+│   ├── event.html
+│   ├── join.html
+│   ├── link.html
+├── css/
+│   ├── styles.css
+├── js/
+│   ├── main.js
+│   ├── events.js
+├── data/
+│   ├── events.json
+├── assets/
+│   ├── logo.ico
+│   ├── logo.png
+│   ├── logo360.png
+├── fonts/
+│   ├── NotoSansTC-Regular.ttf
+│   ├── NotoSansTC-Bold.ttf
+│   ├── Roboto-Regular.ttf
+│   ├── Roboto-Bold.ttf
+│   ├── SourceHanSerifTC-Regular.ttf
+│   ├── SourceHanSerifTC-Bold.ttf
+│   ├── Montserrat-Regular.ttf
+│   ├── Montserrat-Bold.ttf

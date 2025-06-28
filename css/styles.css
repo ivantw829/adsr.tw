@@ -1,0 +1,133 @@
+/* 本地字體 */
+@font-face {
+    font-family: 'Noto Sans TC';
+    src: url('../fonts/NotoSansTC-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Noto Sans TC';
+    src: url('../fonts/NotoSansTC-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Source Han Serif TC';
+    src: url('../fonts/SourceHanSerifTC-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Source Han Serif TC';
+    src: url('../fonts/SourceHanSerifTC-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* 字體應用 */
+body {
+    font-family: 'Source Han Serif TC', 'Noto Sans TC', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+.font-source-han {
+    font-family: 'Source Han Serif TC', 'Noto Sans TC', sans-serif;
+}
+
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Logo Icon */
+.logo-icon {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+nav a:hover .logo-icon {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Logo Animation */
+.animate-logo {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.event-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.event-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Navigation */
+#mobile-menu.active {
+    display: flex;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        font-size: 1.1rem;
+    }
+    section h1 {
+        font-size: 2.5rem;
+    }
+    section h2 {
+        font-size: 1.5rem;
+    }
+    section p {
+        font-size: 1rem;
+    }
+    .event-card {
+        padding: 1rem;
+    }
+    .event-card h3 {
+        font-size: 1.25rem;
+    }
+    .logo-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
