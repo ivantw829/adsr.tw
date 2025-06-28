@@ -35,17 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Detect if the device is touch-enabled
                 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-                // Animate event cards with parallax effect
-                gsap.to(eventCard, {
-                    scrollTrigger: {
-                        trigger: eventCard,
-                        start: 'top 80%',
-                        onEnter: () => eventCard.classList.add('visible')
-                    },
-                    y: -10 * index,
-                    opacity: 1,
+                // Animate event cards with fade-in and slide-in
+                gsap.from(eventCard, {
+                    opacity: 0,
+                    x: index % 2 === 0 ? 20 : -20, // Alternate slide direction
                     duration: isTouchDevice ? 0.3 : 0.5,
-                    ease: 'power2.out'
+                    delay: index * 0.2,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        eventCard.classList.add('visible');
+                    }
                 });
 
                 if (!isTouchDevice) {

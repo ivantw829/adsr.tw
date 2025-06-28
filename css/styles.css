@@ -98,19 +98,11 @@ h1, h2, h3 {
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     }
-    .event-card {
-        background: rgba(31, 41, 55, 0.2);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
 }
 @supports not (backdrop-filter: blur(10px)) {
     .shadow-glass {
         background: rgba(31, 41, 55, 0.7);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-    .event-card {
-        background: rgba(31, 41, 55, 0.7);
     }
 }
 
@@ -168,25 +160,17 @@ h1, h2, h3 {
     font-weight: 800;
 }
 
-/* Event Card Hover Effect */
+/* Event Card Styling */
 .event-card {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    transition: all 0.3s ease;
 }
 
 .event-card.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-.event-card:hover {
-    transform: scale(1.05);
-    background-color: rgba(55, 65, 81, 0.7);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Shine Effect for Links Page Buttons */
@@ -246,7 +230,7 @@ h1, h2, h3 {
         font-size: 0.875rem;
     }
     .event-card {
-        padding: 1.25rem;
+        padding: 1rem;
         max-width: 90%;
         margin-left: auto;
         margin-right: auto;
@@ -256,10 +240,6 @@ h1, h2, h3 {
     }
     .event-card p {
         font-size: 0.875rem;
-    }
-    .event-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
     .event-card a {
         font-size: 0.875rem;
