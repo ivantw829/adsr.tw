@@ -15,14 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('../data/events.json')
         .then(response => response.json())
         .then(events => {
-            // Sort events by date (index 2) in descending order (latest first)
-            events.sort((a, b) => new Date(b[2]) - new Date(a[2]));
+            // Sort events by date (index 2) in descending order with error handling
+            events.sort((a, b) => {
+                const dateA = new Date(a[2]);
+                const dateB = new Date(b[2]);
+                // Handle invalid dates by placing them at the end
+                if (isNaN(dateA)) return 1;
+                if (isNaN(dateB)) return -1;
+                return dateB - dateA;
+            });
 
             const eventsList = document.getElementById('events-list');
             events.forEach(([title, content, date, category, link], index) => {
                 const eventCard = document.createElement('div');
                 eventCard.classList.add('event-card', 'bg-gray-800', 'p-6', 'rounded-lg', 'shadow-lg');
-                eventCard.style.borderLeft = `4px solid ${categoryColors[category.replace('#', '')]}`;
+                eventCard.style.borderLeft = `4px solid ${categoryColors[category.replace('#', '')] || '#a32622'}`;
                 eventCard.innerHTML = `
                     <h3 class="text-xl font-bold text-red-700 font-montserrat animate-text">${title}</h3>
                     <p class="text-gray-300 mt-2 font-source-han">${content}</p>
@@ -35,18 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Set initial opacity to ensure visibility
                 gsap.set(eventCard, { opacity: 1 });
 
-                // Animate event cards with fade-in and slide-in
-                gsap.fromTo(
-                    eventCard,
-                    { opacity: 0.5, x: index % 2 === 0 ? 20 : -20 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 'ontouchstart' in window || navigator.maxTouchPoints > 0 ? 0.3 : 0.4,
-                        delay: index * 0.1,
-                        ease: 'power2.out'
-                    }
-                );
+                // Animate event cards with slide-in only
+                gsap.from(eventCard, {
+                    x: index % 2 === 0 ? 20 : -20,
+                    duration: 'ontouchstart' in window || navigator.maxTouchPoints > 0 ? 0.3 : 0.4,
+                    delay: index * 0.05,
+                    ease: 'power2.out'
+                });
 
                 // Detect if the device is touch-enabled
                 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
