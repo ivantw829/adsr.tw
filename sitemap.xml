@@ -10,10 +10,14 @@
   </url>
   <url>
     <loc>https://adsr.tw/pages/join.html</loc>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://adsr.tw/pages/link.html</loc>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://adsr.tw/pages/paper.html</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>
