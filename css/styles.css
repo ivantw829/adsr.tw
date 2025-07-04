@@ -55,6 +55,14 @@
     font-style: normal;
     font-display: swap;
 }
+/* 新增字體 ThePeakFontBeta_V0_102 */
+@font-face {
+    font-family: 'ThePeakFontBeta';
+    src: url('../fonts/ThePeakFontBeta_V0_102.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 
 /* 字體應用 */
 body {
@@ -78,6 +86,10 @@ h1, h2, h3 {
 
 .font-roboto {
     font-family: 'Roboto', sans-serif;
+}
+
+.font-peak {
+    font-family: 'ThePeakFontBeta', sans-serif;
 }
 
 /* Logo Icon */
