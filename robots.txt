@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block access to sensitive directories
+Disallow: /data/
+Disallow: /fonts/
+
+# Allow assets, css, js, and pages
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /pages/
+
+# Sitemap
+Sitemap: https://adsr.tw/sitemap.xml
