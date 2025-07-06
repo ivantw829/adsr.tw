@@ -26,16 +26,25 @@
             </ul>
         </div>
     </nav>
-    <main class="flex-1 flex items-center justify-center relative z-10 pt-32 pb-12">
-        <section class="container mx-auto text-center max-w-xl bg-gray-800 bg-opacity-80 rounded-lg shadow-lg p-8">
-            <img src="../assets/logo.png" alt="ADSR logo" class="mx-auto mb-6 w-24 animate-logo">
-            <h1 class="text-4xl font-bold text-red-600 mb-4 font-montserrat animate-text">頁面建置中</h1>
-            <h2 class="text-2xl text-gray-100 mb-6 font-roboto">未來這裡將會更新 ADSR 所有倡議文章。</h2>
-            <p class="text-lg text-gray-300 font-source-han">敬請期待，感謝您的關注與支持！</p>
-        </section>
-    </main>
+    <!-- Papers Section (event.html 風格) -->
+    <section class="py-20 mt-16">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold text-red-700 text-center mb-10 font-montserrat animate-text">倡議文章</h1>
+            <div id="papers-grid" class="space-y-4"></div>
+            <div id="loading-message" class="text-center text-gray-400 mt-8">
+                <i class="fas fa-spinner fa-spin mr-2"></i>載入文章中...
+            </div>
+            <div id="no-papers-message" class="text-center text-gray-400 mt-8 hidden">
+                <i class="fas fa-file-alt text-4xl mb-4"></i>
+                <p>暫無倡議文章</p>
+            </div>
+        </div>
+    </section>
     <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-12 text-sm" aria-label="頁尾">
         <div>© 2025 捍衛全台學權行動 ADSR. 保留所有權利。</div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="../js/paper.js"></script>
 </body>
 </html>

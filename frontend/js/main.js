@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Particles.js for Home Page
     if (document.getElementById('particles-js')) {
         particlesJS('particles-js', {
             particles: {
@@ -20,13 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize navigation links for desktop and mobile
     document.querySelectorAll('.nav-links').forEach(nav => {
         nav.style.display = 'flex';
         nav.style.opacity = '1';
     });
 
-    // Animate navigation links with fade-in and scale effect (exclude HOME)
     gsap.from('.nav-link:not(.nav-link-home)', {
         opacity: 0,
         scale: 0.9,
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Animate HOME link with subtle scale effect
     gsap.from('.nav-link-home', {
         scale: 0.9,
         opacity: 0,
@@ -55,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Animate navigation logo with fade-in effect
     gsap.from('.nav-logo', {
         y: -20,
         opacity: 0,
@@ -63,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out'
     });
 
-    // Animate hero section content with simple fade-in
     gsap.from('section h1, section h2, section p, section img', {
         y: 30,
         autoAlpha: 0,
@@ -77,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Animate navigation icons and logo on hover
     gsap.utils.toArray('.nav-link, .nav-logo').forEach(link => {
         link.addEventListener('mouseenter', () => {
             gsap.to(link.querySelector('i') || link.querySelector('.logo-icon'), {
@@ -105,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ease: 'power2.out'
             });
         });
-        // Ensure click events are not blocked
         link.addEventListener('click', (e) => {
             e.stopPropagation();
             window.location.href = link.getAttribute('href');

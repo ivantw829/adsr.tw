@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('../data/events.json')
         .then(response => response.json())
         .then(events => {
-            // Reverse the array to display oldest events first
-            // events.reverse();
-
             const eventsList = document.getElementById('events-list');
             events.forEach(([title, content, date, category, link], index) => {
                 const eventCard = document.createElement('div');
@@ -32,10 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 eventsList.appendChild(eventCard);
 
-                // Set initial state to ensure visibility and alignment
                 gsap.set(eventCard, { opacity: 1, x: 0 });
 
-                // Animate event cards with slide-in only
                 gsap.from(eventCard, {
                     x: index % 2 === 0 ? 20 : -20,
                     duration: 'ontouchstart' in window || navigator.maxTouchPoints > 0 ? 0.3 : 0.4,
@@ -43,11 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: 'power2.out'
                 });
 
-                // Detect if the device is touch-enabled
                 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
                 if (!isTouchDevice) {
-                    // Simplified hover effect for desktop
                     eventCard.addEventListener('mouseenter', () => {
                         gsap.to(eventCard, {
                             scale: 1.05,
@@ -67,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     });
                 } else {
-                    // Touch interaction for mobile devices
                     eventCard.addEventListener('touchstart', () => {
                         gsap.to(eventCard, {
                             scale: 1.05,

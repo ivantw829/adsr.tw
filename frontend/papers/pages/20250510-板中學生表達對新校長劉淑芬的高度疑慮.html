@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 在這裡更改標題 -->
+  <title>板中學生表達對新校長劉淑芬的高度疑慮</title>
+  <!-- 在這裡更改內文 -->
+  <meta name="description" content="板中學生發起和平示威，要求新校長劉淑芬公開承諾「不剝奪學生自由、不打壓學生權益、不干涉學生自治」，以捍衛板中長久以來的自由開放校風，並警告若違背承諾將團結抗爭到底。">
+  <!-- 在這裡更改日期 -->
+  <meta name="date" content="2025-05-10">
+  <!-- 在這裡更改類別 -->
+  <meta name="category" content="#各校行動">
+  <!-- 在這裡更改小縮圖 -->
+  <meta name="thumbnail" content="https://i.postimg.cc/zGrmzGcF/496702897-17847875592467426-996406026541174082-n.webp">
+  <!-- 以下不做更改 -->
+  <link rel="icon" href="../assets/logo.ico">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .my-prose h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      margin-bottom: 1.2em;
+    }
+    .my-prose h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      margin-bottom: 1em;
+    }
+    .my-prose h3 {
+      font-size: 1.17rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      margin-bottom: 0.8em;
+    }
+    .my-prose strong {
+      color: #f87171; /* Tailwind text-red-400 */
+      font-weight: bold;
+    }
+    .my-prose img {
+      max-width: 100%;
+      max-height: 500px;
+      height: auto;
+      width: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+  
+  <nav class="bg-gray-800 bg-opacity-90 backdrop-blur-lg p-4 fixed w-full top-0 z-50 shadow-glass" aria-label="主選單">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="../../index.html" class="flex items-center text-2xl font-bold text-red-700 nav-logo" aria-label="ADSR 首頁">
+        <img src="../../assets/logo.ico" alt="ADSR 捍衛全台學權行動 icon" class="logo-icon w-8 h-8 mr-2">
+        ADSR
+      </a>
+      <ul class="nav-links flex gap-6">
+        <li><a href="../../index.html" class="hover:text-red-700 transition nav-link nav-link-home"><i class="fas fa-home mr-2"></i>HOME</a></li>
+        <li><a href="../../pages/event.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-calendar-alt mr-2"></i>EVENT</a></li>
+        <li><a href="../../pages/paper.html" class="hover:text-red-700 transition nav-link"><i class="fa-solid fa-file mr-2"></i>PAPER</a></li>
+        <li><a href="../../pages/link.html" class="hover:text-red-700 transition nav-link"><i class="fas fa-link mr-2"></i>LINK</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <main class="flex-1 relative z-10 pt-32 pb-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <article id="content" class="my-prose bg-gray-800 bg-opacity-80 rounded-lg shadow-lg p-8 space-y-8">
+        <p>載入中…</p>
+      </article>
+    </div>
+  </main>
+
+  
+  <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-12 text-sm" aria-label="頁尾">
+    <div>© 2025 捍衛全台學權行動 ADSR. 保留所有權利。</div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  
+  <script>
+    // 修改 Markdown 檔案路徑
+    const mdFileName = '../mds/20250510-板中學生表達對新校長劉淑芬的高度疑慮.md';
+    // 設定 marked.js 使單行換行自動轉為 <br>
+    marked.setOptions({ breaks: true });
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const resp = await fetch(mdFileName);
+        if (!resp.ok) throw new Error(`找不到 Markdown 檔案: ${mdFileName}`);
+        const md = await resp.text();
+        const raw = marked.parse(md);
+        const safe = DOMPurify.sanitize(raw);
+        document.getElementById('content').innerHTML = safe;
+        Prism && Prism.highlightAll();
+      } catch (e) {
+        document.getElementById('content').innerHTML =
+          `<p style=\"color:red\">載入失敗：${e.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
