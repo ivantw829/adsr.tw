@@ -2,22 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://adsr.tw/</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://adsr.tw/pages/bylaws.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://adsr.tw/pages/event.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://adsr.tw/pages/join.html</loc>
-    <priority>0.7</priority>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://adsr.tw/pages/link.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://adsr.tw/pages/paper.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://adsr.tw/papers/pages/20250701-行動未止發聲未息，重整隊伍蓄勢待發.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://adsr.tw/papers/pages/20250702-溝通諾言遲未兌現，一個月過去仍無下文！懇請教育部莫要強推.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://adsr.tw/papers/pages/20250703-備審資料造假的反思（一）：升學主義消失了嗎？.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://adsr.tw/papers/pages/校園霸凌性騷接連爆出！教育制度出了什麼問題？.html</loc>
+    <lastmod>2025-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

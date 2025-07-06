@@ -71,5 +71,110 @@ async def custom_404_handler(request: Request, exc):
         return FileResponse(str(index_path), media_type="text/html")
     return exc
 
+
+# 動態產生 sitemap.xml
+from fastapi.responses import Response
+import datetime
+
+@app.get("/sitemap.xml", response_class=Response)
+def sitemap():
+    base_url = "https://adsr.tw"
+    pages_dir = Path(__file__).parent / "frontend" / "pages"
+    papers_pages_dir = Path(__file__).parent / "frontend" / "papers" / "pages"
+    urls = []
+    # 首頁
+    urls.append({
+        "loc": f"{base_url}/",
+        "priority": "1.0",
+        "lastmod": datetime.date.today().isoformat(),
+        "changefreq": "daily"
+    })
+    # frontend/pages/*.html
+    if pages_dir.exists():
+        for html_file in sorted(pages_dir.glob("*.html")):
+            urls.append({
+                "loc": f"{base_url}/pages/{html_file.name}",
+                "priority": "0.8",
+                "lastmod": datetime.date.fromtimestamp(html_file.stat().st_mtime).isoformat(),
+                "changefreq": "monthly"
+            })
+    # frontend/papers/pages/*.html
+    if papers_pages_dir.exists():
+        for html_file in sorted(papers_pages_dir.glob("*.html")):
+            urls.append({
+                "loc": f"{base_url}/papers/pages/{html_file.name}",
+                "priority": "0.7",
+                "lastmod": datetime.date.fromtimestamp(html_file.stat().st_mtime).isoformat(),
+                "changefreq": "monthly"
+            })
+    # 產生 XML
+    xml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+    for url in urls:
+        xml.append("  <url>")
+        xml.append(f"    <loc>{url['loc']}</loc>")
+        xml.append(f"    <lastmod>{url['lastmod']}</lastmod>")
+        xml.append(f"    <changefreq>{url['changefreq']}</changefreq>")
+        xml.append(f"    <priority>{url['priority']}</priority>")
+        xml.append("  </url>")
+    xml.append("</urlset>")
+    return Response("\n".join(xml), media_type="application/xml")
+
+
+# 寫入 sitemap.xml 到 frontend/sitemap.xml
+def write_sitemap_file():
+    base_url = "https://adsr.tw"
+    pages_dir = Path(__file__).parent / "frontend" / "pages"
+    papers_pages_dir = Path(__file__).parent / "frontend" / "papers" / "pages"
+    urls = []
+    urls.append({
+        "loc": f"{base_url}/",
+        "priority": "1.0",
+        "lastmod": datetime.date.today().isoformat(),
+        "changefreq": "daily"
+    })
+    if pages_dir.exists():
+        for html_file in sorted(pages_dir.glob("*.html")):
+            urls.append({
+                "loc": f"{base_url}/pages/{html_file.name}",
+                "priority": "0.8",
+                "lastmod": datetime.date.fromtimestamp(html_file.stat().st_mtime).isoformat(),
+                "changefreq": "monthly"
+            })
+    if papers_pages_dir.exists():
+        for html_file in sorted(papers_pages_dir.glob("*.html")):
+            urls.append({
+                "loc": f"{base_url}/papers/pages/{html_file.name}",
+                "priority": "0.7",
+                "lastmod": datetime.date.fromtimestamp(html_file.stat().st_mtime).isoformat(),
+                "changefreq": "monthly"
+            })
+    xml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+    for url in urls:
+        xml.append("  <url>")
+        xml.append(f"    <loc>{url['loc']}</loc>")
+        xml.append(f"    <lastmod>{url['lastmod']}</lastmod>")
+        xml.append(f"    <changefreq>{url['changefreq']}</changefreq>")
+        xml.append(f"    <priority>{url['priority']}</priority>")
+        xml.append("  </url>")
+    xml.append("</urlset>")
+    sitemap_path = Path(__file__).parent / "frontend" / "sitemap.xml"
+    with open(sitemap_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(xml))
+
+# 啟動時自動寫入 sitemap
+write_sitemap_file()
+
+# 提供 API 讓前端可手動觸發 sitemap 重新產生
+@app.post("/api/generate_sitemap")
+def api_generate_sitemap():
+    write_sitemap_file()
+    return {"status": "ok"}
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
