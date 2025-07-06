@@ -5,6 +5,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 import uvicorn
 from fastapi.staticfiles import StaticFiles
+from fastapi.requests import Request
 
 app = FastAPI()
 
@@ -60,5 +61,15 @@ def get_paper(filename: str):
 # 掛載 frontend 為靜態網站根目錄，API 路由優先
 app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
 
+# 404 handler: 非 /api/ 路徑時導向 index.html
+@app.exception_handler(404)
+async def custom_404_handler(request: Request, exc):
+    if request.url.path.startswith("/api/"):
+        return await app.default_exception_handler(request, exc)
+    index_path = Path(__file__).parent / "frontend" / "index.html"
+    if index_path.exists():
+        return FileResponse(str(index_path), media_type="text/html")
+    return exc
+
 if __name__ == "__main__":
-    uvicorn.run("api_server:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
